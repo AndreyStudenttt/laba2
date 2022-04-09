@@ -25,14 +25,10 @@ namespace Lab2v2
             Name = "Война";
             Rating = 12.3;
         }
-        public string ToFullString()
-        {
-            return "Автор: " + Author + "\n" + "Название статьи: " + Name + "\n" + "Реитинг статьи: " + Rating;
-           
-        }
+        
         public override string ToString()
         {
-            return string.Format("\nAuthor: {0}", Author);
+            return $"Автор: {Author}{Environment.NewLine} Название статьи: { Name}\n Реитинг статьи: {Rating}";
         }
     }
 }

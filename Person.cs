@@ -14,17 +14,17 @@ namespace Lab2v2
         private string lname;
         private System.DateTime bdate;
 
-        public Person (string FirstName, string LastName, DateTime studentBDate)
+        public Person (string FirstName, string LastName, DateTime BDate)
         {
             fname = FirstName;
             lname = LastName;
-            bdate = studentBDate;
+            bdate = BDate;
         }
         
         public Person()
         {
-            fname = "аАндрей";
-            lname = "аАщеулов";
+            fname = "Андрей";
+            lname = "Ащеулов";
             bdate = new DateTime(2013, 12, 1);
         }
 
@@ -64,14 +64,16 @@ namespace Lab2v2
             }
         }
 
-        public string ToFullString()
+        public override string ToString()
         {
-            return "Имя: " + fname + "\n" + "Фамилия: " + lname + "\n" + "Дата рождения: " + BDate;
+            return string.Format("{0} {1}\nDate of birth: {2:dd.MM.yyyy}", fname, lname, BDate);
         }
+
+
 
         public string ToShortString()
         {
-            return "Имя: " + fname + "\n" + "Фамилия: " + lname;
+            return $"\n Имя: {fname} \n Фамилия: {lname}";
         }
 
 

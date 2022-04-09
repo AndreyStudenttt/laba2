@@ -12,7 +12,7 @@ namespace Lab2v2
         private Frequency frequencyzh;
         private System.DateTime datezh;
         private int tzh;
-        private List<Article> stats = new List<Article>();
+        private Article[] stats = new Article[1];
 
         public Magazine(string NameZh, Frequency FrequencyZh, DateTime DateZh, int TZh)
         {
@@ -27,6 +27,7 @@ namespace Lab2v2
             frequencyzh = Frequency.Monthly;
             datezh = new DateTime(2013, 12, 2);
             tzh = 1000;
+            stats[0] = new Article();
         }
         public string NameZh
         {
@@ -56,21 +57,42 @@ namespace Lab2v2
                 return tzh;
             }
         }
-
-        public IReadOnlyList<Article> ArticleList
+        private int _addedArticleCount;
+        public void AddArticle(Article a)
         {
-            get
+
+            stats[_addedArticleCount] = a;
+            _addedArticleCount++;
+            if (_addedArticleCount == stats.Length)
             {
-                return stats.AsReadOnly();
+                Array.Resize(ref stats, _addedArticleCount + 1);
             }
         }
-        public void AddArticle(params Article[] article)
+       
+        public string Write(params Article[] article)
         {
-            stats.AddRange(article);
+            string result = "";
+            for ( int i = 0; i < stats.Length; i++)
+            {
+                if (stats[i] != null)
+                {
+                    result += stats[i].ToString() + Environment.NewLine+ Environment.NewLine; ;
+                }
+                
+            }
+            return result;
+            
         }
+
+       
         public override string ToString()
         {
-            return string.Format("\nArticle: {0}", stats);
+            return $"Название журнала: {namezh}{Environment.NewLine}" +
+                $"Периодичность выхода журнала: {frequencyzh}{Environment.NewLine}" +
+                $"Дата выхода журнла: {datezh}{Environment.NewLine}" +
+                $"Тираж журнала {tzh}{Environment.NewLine}" +
+                $"Статьи:{Environment.NewLine} " +
+                $"{Write()}";
         }
     }
 }
